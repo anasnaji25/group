@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.group">
+    package="com.financeapp.android">
    <application
         android:label="group"
         android:name="${applicationName}"

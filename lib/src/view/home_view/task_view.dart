@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:group/src/admin/admin_view/admin_dashboard_view.dart';
 import 'package:group/src/const/colors.dart';
+import 'package:group/src/controllers/groups_controller.dart';
 import 'package:group/src/view/home_view/home_page.dart';
 
 import '../../const/fonts.dart';
@@ -13,6 +16,23 @@ class TaskScreenView extends StatefulWidget {
 }
 
 class _TaskScreenViewState extends State<TaskScreenView> {
+  final groupController = Get.find<GroupsController>();
+
+  @override
+  void initState() {
+    super.initState();
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>");
+
+    getList();
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>");
+  }
+
+  getList() async {
+    print("gt list .,.");
+    groupController.getGroupsList();
+    // groupController.getGroupsList2();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -21,9 +41,12 @@ class _TaskScreenViewState extends State<TaskScreenView> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: const Icon(
-          Icons.menu,
-          color: Colors.white,
+        leading: InkWell(
+          onTap: () {},
+          child: const Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
         ),
       ),
       body: ListView(
@@ -94,194 +117,89 @@ class _TaskScreenViewState extends State<TaskScreenView> {
                       const SizedBox(
                         height: 30,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "barani 1",
-                                  style: roboto.copyWith(),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "12(Members)",
-                                  style: roboto.copyWith(
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline),
-                                )
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "₹6,150.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
+                      Container(
+                        height: 230,
+                        child: GetBuilder<GroupsController>(
+                            builder: (_) => ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: groupController.listOfGroups.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, right: 15),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              groupController
+                                                  .listOfGroups[index]
+                                                  .groupName,
+                                              style: roboto.copyWith(
+                                                  color: Colors.black),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "0(Members)",
+                                              style: roboto.copyWith(
+                                                  color: Colors.blue,
+                                                  decoration:
+                                                      TextDecoration.underline),
+                                            )
+                                          ],
+                                        ),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.end,
+                                              children: [
+                                                Text(
+                                                  "₹0.00",
+                                                  style: roboto.copyWith(
+                                                      color: Colors.black,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "Collected:₹0.00",
+                                                  style: roboto.copyWith(
+                                                      color: Colors.black45,
+                                                      fontSize: 12),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(
+                                              width: 5,
+                                            ),
+                                            Icon(
+                                              Icons.watch_later_rounded,
+                                              color: Colors.yellow[600],
+                                              size: 20,
+                                            )
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Collected:₹0.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black45, fontSize: 12),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.watch_later_rounded,
-                                  color: Colors.yellow[600],
-                                  size: 20,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                                  );
+                                })),
                       ),
                       const SizedBox(
-                        height: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "Sky",
-                                  style: roboto.copyWith(),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "33(Members)",
-                                  style: roboto.copyWith(
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline),
-                                )
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "₹33,150.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Collected:₹0.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black45, fontSize: 12),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.watch_later_rounded,
-                                  color: Colors.yellow[600],
-                                  size: 20,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, right: 15),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  "skyblue",
-                                  style: roboto.copyWith(),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "16(Members)",
-                                  style: roboto.copyWith(
-                                      color: Colors.blue,
-                                      decoration: TextDecoration.underline),
-                                )
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      "₹10,150.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      "Collected:₹0.00",
-                                      style: roboto.copyWith(
-                                          color: Colors.black45, fontSize: 12),
-                                    ),
-                                    const SizedBox(
-                                      height: 5,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  Icons.watch_later_rounded,
-                                  color: Colors.yellow[600],
-                                  size: 20,
-                                )
-                              ],
-                            ),
-                          ],
-                        ),
+                        height: 10,
                       ),
                     ],
                   ),
