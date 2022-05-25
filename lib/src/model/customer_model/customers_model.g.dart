@@ -32,7 +32,7 @@ CustomerModel _$CustomerModelFromJson(Map<String, dynamic> json) =>
       panCardPhoto: (json['panCardPhoto'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
-      createdAt: DateTime.parse(json['createdAt'] as String),
+      createdAt: json['createdAt'] as String,
     );
 
 Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
@@ -55,7 +55,7 @@ Map<String, dynamic> _$CustomerModelToJson(CustomerModel instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'placeName': instance.placeName,
-      'createdAt': instance.createdAt.toIso8601String(),
+      'createdAt': instance.createdAt,
       'aadharCardPhotos': instance.aadharCardPhotos,
       'panCardPhoto': instance.panCardPhoto,
     };

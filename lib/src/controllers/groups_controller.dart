@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:group/src/admin/admin_view/admin_dashboard_view.dart';
+import 'package:group/src/model/customer_model/customers_model.dart';
 import 'package:group/src/model/get_eployeemodel.dart';
 import 'package:group/src/model/group_model/group_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -19,6 +20,7 @@ class GroupsController extends GetxController {
   late GetEmployeeModel employeeData;
 
   List<GroupModel> listOfGroups = [];
+  List<CustomerModel> listOfCustomer = [];
 
   setDefault() {
     isMonthlyOrWeekly(1);
@@ -67,8 +69,7 @@ class GroupsController extends GetxController {
     List<GroupModel> templist = [];
     final prefs = await SharedPreferences.getInstance();
     String? username = prefs.getString("userName");
-    var ref =
-        _firestore.collection("Groups").where("user_name", isEqualTo: username);
+    var ref = _firestore.collection("Groups").where("user_name", isEqualTo: username);
     var snapshot = await ref.get();
     var data = snapshot.docs;
     data.forEach((element) => templist.add(GroupModel(

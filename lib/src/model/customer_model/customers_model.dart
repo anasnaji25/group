@@ -21,7 +21,7 @@ class CustomerModel {
   double latitude;
   double longitude;
   String placeName;
-  DateTime createdAt;
+  String createdAt;
   List<String> aadharCardPhotos;
   List<String> panCardPhoto;
 
@@ -48,4 +48,8 @@ class CustomerModel {
     required this.panCardPhoto,
     required this.createdAt,
   });
+
+  factory CustomerModel.fromJson(Map<String, dynamic> json) =>
+      _$CustomerModelFromJson(json);
+  Map<String, dynamic> toJson() => _$CustomerModelToJson(this);
 }

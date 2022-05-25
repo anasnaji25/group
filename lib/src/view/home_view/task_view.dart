@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:group/src/admin/admin_view/admin_dashboard_view.dart';
 import 'package:group/src/const/colors.dart';
 import 'package:group/src/controllers/groups_controller.dart';
+import 'package:group/src/model/group_model/group_model.dart';
+import 'package:group/src/view/group_collection_view/group_collection_view.dart';
 import 'package:group/src/view/home_view/home_page.dart';
 
 import '../../const/fonts.dart';
@@ -145,12 +147,21 @@ class _TaskScreenViewState extends State<TaskScreenView> {
                                             const SizedBox(
                                               width: 10,
                                             ),
-                                            Text(
-                                              "0(Members)",
-                                              style: roboto.copyWith(
-                                                  color: Colors.blue,
-                                                  decoration:
-                                                      TextDecoration.underline),
+                                            InkWell(
+                                              onTap: () {
+                                                Get.to(() =>
+                                                    GroupCollectionView(
+                                                      groupData: groupController
+                                                          .listOfGroups[index],
+                                                    ));
+                                              },
+                                              child: Text(
+                                                "0(Members)",
+                                                style: roboto.copyWith(
+                                                    color: Colors.blue,
+                                                    decoration: TextDecoration
+                                                        .underline),
+                                              ),
                                             )
                                           ],
                                         ),
